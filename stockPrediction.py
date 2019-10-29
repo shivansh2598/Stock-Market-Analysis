@@ -19,10 +19,10 @@ from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler(feature_range=(0, 1))
 
 #read the file
-df = pd.read_csv('NSE-TATAGLOBAL11.csv')
+df = pd.read_csv('PNB.csv')
 
 #print the head
-df.head()
+print(df.head())
 
 #creating dataframe
 data = df.sort_index(ascending=True, axis=0)
@@ -38,8 +38,8 @@ new_data.drop('Date', axis=1, inplace=True)
 #creating train and test sets
 dataset = new_data.values
 
-train = dataset[0:987,:]
-valid = dataset[987:,:]
+train = dataset[0:200,:]
+valid = dataset[200:,:]
 
 #converting dataset into x_train and y_train
 scaler = MinMaxScaler(feature_range=(0, 1))
@@ -77,8 +77,8 @@ closing_price = model.predict(X_test)
 closing_price = scaler.inverse_transform(closing_price)
 
 #for plotting
-train = new_data[:987]
-valid = new_data[987:]
+train = new_data[:200]
+valid = new_data[200:]
 valid['Predictions'] = closing_price
 plt.plot(train['Close'])
 plt.plot(valid[['Close','Predictions']])
